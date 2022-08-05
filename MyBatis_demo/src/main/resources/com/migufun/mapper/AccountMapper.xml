@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.migufun.mapper.AccountMapper">
-    <select id="selectAll" resultType="com.migufun.pojo.Account">
+    <select id="selectAll" resultType="Account">
         select * from account;
     </select>
 </mapper>
