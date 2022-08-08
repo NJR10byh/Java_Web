@@ -30,11 +30,11 @@
             1、#{}：会将其替换为?，为了防止SQL注入
             2、${}：拼sql，会存在SQL注入问题
      -->
-    <select id="selectById" resultMap="GoodsResultMap">
-        select *
-        from goods_info
-        where id = #{id};
-    </select>
+    <!--    <select id="selectById" resultMap="GoodsResultMap">-->
+    <!--        select *-->
+    <!--        from goods_info-->
+    <!--        where id = #{id};-->
+    <!--    </select>-->
 
     <!-- 多条件查询 -->
     <select id="selectByCondition" resultMap="GoodsResultMap">
@@ -75,8 +75,44 @@
     </select>
 
     <!-- 添加数据 -->
-    <insert id="addGoods">
+    <insert id="addGoods" useGeneratedKeys="true" keyProperty="id">
         insert into goods_info (goods_name, brand, price, description)
         values (#{goodsName}, #{brand}, #{price}, #{description});
     </insert>
+
+    <!-- 修改数据 -->
+    <update id="updateGoods">
+        update goods_info
+        <set>
+            <if test="goodsName != null and goodsName != '' ">
+                goods_name = #{goodsName},
+            </if>
+            <if test="brand != null and brand != '' ">
+                brand = #{brand},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="description != null and description != '' ">
+                description = #{description},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 删除数据 -->
+    <delete id="deleteOneGoods">
+        delete
+        from goods_info
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteMoreGoods">
+        delete from goods_info
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>;
+    </delete>
+
 </mapper>

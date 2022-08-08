@@ -2,6 +2,7 @@ package com.migufun.mapper;
 
 import com.migufun.pojo.Goods;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,10 @@ public interface GoodsInfoMapper {
     List<Goods> selectAll();
 
     // 查看详情：根据id查询
+//    Goods selectById(int id);
+
+    // 使用注解
+    @Select("select * from goods_info where id = #{id}")
     Goods selectById(int id);
 
     // 1、散装参数：如果方法中有多个参数，需要使用 @Param("SQL参数占位符名称")
@@ -37,4 +42,11 @@ public interface GoodsInfoMapper {
     // 添加数据
     void addGoods(Map map);
 
+    void addGoods(Goods good);
+
+    void updateGoods(Goods good);
+
+    void deleteOneGoods(int id);
+
+    void deleteMoreGoods(@Param("ids") int[] ids);
 }

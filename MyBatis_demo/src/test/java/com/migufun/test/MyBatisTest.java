@@ -244,4 +244,150 @@ public class MyBatisTest {
         // 5、释放资源
         sqlSession.close();
     }
+
+    @Test
+    public void TestAdd_getId() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 2、获取 SqlSession 对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 如果不想手动提交，openSession(true)
+        // SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        // 3、执行sql
+        /**
+         * selectList 会把结果自动封装成 List
+         * selectOne 会把结果自动封装成 Object
+         */
+        // 3.1 获取 GoodsInfoMapper 接口的代理对象
+        GoodsInfoMapper mapper = sqlSession.getMapper(GoodsInfoMapper.class);
+
+        // 4、执行方法
+        // 接受参数
+        String brand = "Apple";
+        String goodsName = "Apple Watch Series 7";
+        Double price = 2999.00;
+        String description = "全屏先手";
+
+        Goods good = new Goods();
+        good.setGoodsName(goodsName);
+        good.setBrand(brand);
+        good.setPrice(price);
+        good.setDescription(description);
+        mapper.addGoods(good);
+
+        Integer id = good.getId();
+        System.out.println(id);
+
+        // 默认事务开启，需要手动提交
+        sqlSession.commit();
+
+
+        // 5、释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void TestUpdate() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 2、获取 SqlSession 对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 如果不想手动提交，openSession(true)
+        // SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        // 3、执行sql
+        /**
+         * selectList 会把结果自动封装成 List
+         * selectOne 会把结果自动封装成 Object
+         */
+        // 3.1 获取 GoodsInfoMapper 接口的代理对象
+        GoodsInfoMapper mapper = sqlSession.getMapper(GoodsInfoMapper.class);
+
+        // 4、执行方法
+        // 接受参数
+        int id = 12;
+        String description = "十足原创，请细品。";
+
+        Goods good = new Goods();
+        good.setId(id);
+        good.setDescription(description);
+        mapper.updateGoods(good);
+
+        // 默认事务开启，需要手动提交
+        sqlSession.commit();
+
+
+        // 5、释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void TestDeleteOne() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 2、获取 SqlSession 对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 如果不想手动提交，openSession(true)
+        // SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        // 3、执行sql
+        /**
+         * selectList 会把结果自动封装成 List
+         * selectOne 会把结果自动封装成 Object
+         */
+        // 3.1 获取 GoodsInfoMapper 接口的代理对象
+        GoodsInfoMapper mapper = sqlSession.getMapper(GoodsInfoMapper.class);
+
+        // 4、执行方法
+        // 接受参数
+        int id = 8;
+
+        mapper.deleteOneGoods(id);
+
+        // 默认事务开启，需要手动提交
+        sqlSession.commit();
+
+
+        // 5、释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void TestDeleteMore() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 2、获取 SqlSession 对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 如果不想手动提交，openSession(true)
+        // SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        // 3、执行sql
+        /**
+         * selectList 会把结果自动封装成 List
+         * selectOne 会把结果自动封装成 Object
+         */
+        // 3.1 获取 GoodsInfoMapper 接口的代理对象
+        GoodsInfoMapper mapper = sqlSession.getMapper(GoodsInfoMapper.class);
+
+        // 4、执行方法
+        // 接受参数
+        int[] ids = {24, 25};
+
+        mapper.deleteMoreGoods(ids);
+        // 默认事务开启，需要手动提交
+        sqlSession.commit();
+
+
+        // 5、释放资源
+        sqlSession.close();
+    }
 }
