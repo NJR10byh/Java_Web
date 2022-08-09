@@ -1,4 +1,4 @@
-package com.migufun.web;
+package com.migufun.web.Request.RequestDispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +9,21 @@ import java.io.IOException;
 
 /**
  * @author NJR10byh
- * @date 2022/8/8 17:06:33
+ * @date 2022/8/9 14:04:45
  * @description
  */
 
-@WebServlet(urlPatterns = "/demo2",loadOnStartup = 1)
-public class ServletDemo2 extends HttpServlet {
+@WebServlet("/file2")
+public class file2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("get.....");
+        System.out.println("file2...");
+        Object message = req.getAttribute("message");
+        System.out.println(message);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("post.....");
+        this.doGet(req, resp);
     }
 }

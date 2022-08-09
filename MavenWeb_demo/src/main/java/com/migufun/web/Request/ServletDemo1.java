@@ -1,4 +1,4 @@
-package com.migufun.web;
+package com.migufun.web.Request;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -10,17 +10,15 @@ import java.io.IOException;
  * @description
  */
 
-@WebServlet(urlPatterns = "/demo1",loadOnStartup = 1)
+@WebServlet(urlPatterns = "/demo1", loadOnStartup = 1)
 public class ServletDemo1 implements Servlet {
 
     /**
      * @param servletConfig
-     * @throws ServletException
-     *
-     * 初始化方法：默认情况下，Servlet第一次被访问时调用
-     * loadOnStartup：
-     *          负整数：第一次被访问时，创建Servlet对象
-     *          0或正整数：服务器启动时，创建Servlet对象（数字越小优先级越高）
+     * @throws ServletException 初始化方法：默认情况下，Servlet第一次被访问时调用
+     *                          loadOnStartup：
+     *                          负整数：第一次被访问时，创建Servlet对象
+     *                          0或正整数：服务器启动时，创建Servlet对象（数字越小优先级越高）
      */
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -36,9 +34,7 @@ public class ServletDemo1 implements Servlet {
      * @param servletRequest
      * @param servletResponse
      * @throws ServletException
-     * @throws IOException
-     *
-     * 请求处理方法：每一次Servlet被访问时调用
+     * @throws IOException      请求处理方法：每一次Servlet被访问时调用
      */
     @Override
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
