@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registe</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<input type="text" name="username" id="username"><br>
+<input type="password" name="password" id="password"><br>
+<button id="btn">提交</button>
+</body>
+
+<script>
+    document.getElementById("btn").onclick = function () {
+        let obj = {};
+        obj.username = document.getElementById("username").value;
+        obj.password = document.getElementById("password").value;
+        // axios.post("http://localhost:8000/Ajax_demo_war/ajaxServlet", obj).then((res) => {
+        //     console.log(res);
+        // }).catch((err) => {
+        //     console.log(err);
+        // })
+        let data = "username=" + document.getElementById("username").value + "&password=" + document.getElementById("password").value
+        axios({
+            method: "post",
+            url: "http://localhost:8000/Ajax_demo_war/ajaxServlet",
+            data: obj
+        }).then((res) => {
+            if (res.data == "ok") {
+                alert("登录成功！")
+            } else if (res.data == "error") {
+                alert("登录失败！");
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+</script>
+</html>
